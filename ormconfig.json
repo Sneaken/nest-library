@@ -1,0 +1,11 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "924393527",
+  "database": "library",
+  "entities": ["dist/**/**/*.entity{.ts,.js}"],
+  "?synchronize": "自动建表配置--这是注释",
+  "synchronize": false
+}
