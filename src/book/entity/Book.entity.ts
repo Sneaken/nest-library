@@ -3,39 +3,55 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Book {
   @PrimaryGeneratedColumn()
-  id: number; // 书本id
-  @Column({ length: 120 })
-  title: string; // 书名
-  @Column({ type: 'text', length: 2048 })
-  summary: string; // 内容简介
-  @Column({ type: 'json' })
-  author: string; // 作者
-  @Column({ type: 'text', length: 2048 })
-  authorIntro: string; // 作者简介
-  @Column()
-  publisher: string; // 出版社
-  @Column()
-  altTitle: string; // 原作名
-  @Column()
-  originTitle: string; // 原标题
-  @Column()
-  translator?: string; // 译者
-  @Column()
-  pubDate: string; // 出版日期
-  @Column('int')
-  pages: number; // 页数
-  @Column('json')
-  tags: string; // 标签
-  @Column()
-  image: string; // 封面地址
-  @Column()
-  binding: string; // 装帧
-  @Column({ length: 10 })
-  isbn10: string; // 10位isbn
-  @Column({ length: 13 })
-  isbn13: string; // 13位isbn
-  @Column({ type: 'float', length: 5 })
-  price: number; // 定价
-  @Column('json')
-  rating: string; // 评分
+  id: number;
+  @Column({ nullable: true, unique: true, comment: '豆瓣书本id' })
+  // tslint:disable-next-line:variable-name
+  _id?: string;
+  @Column({ length: 512, comment: '书名' })
+  title: string;
+  @Column({ nullable: true, comment: '子标题' })
+  subtitle?: string;
+  @Column({ type: 'text', comment: '内容简介' })
+  summary: string;
+  @Column({ type: 'json', comment: '作者' })
+  author: string;
+  @Column({ type: 'text', comment: '作者简介' })
+  authorIntro: string;
+  @Column({ comment: '出版社' })
+  publisher: string;
+  @Column({ nullable: true, comment: '原作名' })
+  altTitle?: string;
+  @Column({ nullable: true, comment: '原标题' })
+  originTitle?: string;
+  @Column({ nullable: true, comment: '译者' })
+  translator?: string;
+  @Column({ comment: '出版日期' })
+  pubDate: string;
+  @Column({ type: 'int', nullable: true, comment: '页数' })
+  pages?: number;
+  @Column({ type: 'json', nullable: true, comment: '标签' })
+  tags: string;
+  @Column({ type: 'text', comment: '目录' })
+  catalog: string;
+  @Column({ nullable: true, comment: '封面地址' })
+  image?: string;
+  @Column({ nullable: true, comment: '装帧' })
+  binding?: string;
+  @Column({ nullable: true, length: 10, comment: '10位isbn' })
+  isbn10?: string;
+  @Column({ length: 13, comment: '13位isbn' })
+  isbn13: string;
+  @Column({
+    type: 'float',
+    nullable: true,
+    default: 0.0,
+    precision: 5,
+    scale: 2,
+    comment: '定价',
+  })
+  price?: number;
+  @Column({ type: 'json', comment: '评分' })
+  rating: { average: string; min: number; max: number; numRaters: number };
+  @Column({ type: 'json', comment: '图集' })
+  images: { small: string; large: string; medium: string };
 }

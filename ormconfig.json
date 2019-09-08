@@ -7,5 +7,5 @@
   "database": "library",
   "entities": ["dist/**/**/*.entity{.ts,.js}"],
   "?synchronize": "自动建表配置--这是注释",
-  "synchronize": false
+  "synchronize": true
 }
