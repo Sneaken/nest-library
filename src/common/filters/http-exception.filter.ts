@@ -25,6 +25,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     } else {
       response.status(status).json({
         code: status,
+        errorMessage: exception.message.error,
         date: formatDate(new Date(), 'YYYY-MM-DD HH:mm:ss'),
         path: request.url,
       });
